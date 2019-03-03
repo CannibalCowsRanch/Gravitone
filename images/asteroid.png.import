@@ -3,6 +3,9 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/asteroid.png-01527034c4551e53c8883bff4501bb9a.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 

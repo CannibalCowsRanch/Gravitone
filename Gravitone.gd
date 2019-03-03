@@ -1,2 +1,0 @@
-extends "res://Entity.gd"
-

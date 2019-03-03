@@ -1,3 +1,3 @@
-extends "res://Entity.gd"
+extends "res://entities/Entity.gd"
 
 export var resource_quantity = 100;
