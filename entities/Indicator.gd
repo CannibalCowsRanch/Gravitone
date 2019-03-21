@@ -2,7 +2,7 @@ extends Node2D
 class_name Grid
 
 # The movement speed of the indicator
-export var speed: float = 20.0
+const SPEED = 20.0
 
 const PAUSE_DURATION_SLOW = 0.15
 const PAUSE_DURATION_FAST = 0.03
@@ -74,7 +74,7 @@ func process_idle() -> void:
 
 func process_moving(delta: float) -> void:
 	_elapsed += delta
-	var weight = _elapsed * speed
+	var weight = _elapsed * SPEED
 	position = _start_position.linear_interpolate(_target_position, min(weight, 1))
 	if weight >= 1:
 		_elapsed = 0
