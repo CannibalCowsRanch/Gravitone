@@ -1,5 +1,5 @@
 extends TileMap
-class_name Player
+class_name Grid
 
 var tile_size : Vector2 = get_cell_size()
 var half_tile_size : Vector2 = self.tile_size / 2
@@ -8,43 +8,30 @@ var half_tile_size : Vector2 = self.tile_size / 2
 # the viewport size divided by the cell size
 onready var grid_size = Vector2(960 / tile_size.x,
 								512 / tile_size.y)
-var grid = []
-
-onready var Player = preload("res://entities/Player.tscn")
-onready var Indicator = preload("res://entities/Indicator.tscn")
-
+var _grid = []
 
 func _ready():
 	# Create the grid cells
 	for x in range(grid_size.x):
-		grid.append([])
-		for y in range(grid_size.y):
-			grid[x].append({})
+		self._grid.append([])
+		for _y in range(grid_size.y):
+			self._grid[x].append({})
 
-	# init first player
-	var player1 = Player.instance()
-	player1.position = map_to_world(Vector2(1, 1)) + self.half_tile_size
-	player1.top_left = Vector2.ZERO
-	player1.bottom_right = Vector2(floor(grid_size.x / 2), grid_size.y)
-	grid[1][1][player1.type] = player1
-	add_child(player1)
-
-	# init second player
-	var player2 = Player.instance()
-	player2.position = map_to_world(Vector2(grid_size.x - 2, grid_size.y - 2)) + self.half_tile_size
-	player2.top_left = Vector2(ceil(grid_size.x / 2), 0)
-	player2.bottom_right = grid_size
-	grid[grid_size.x - 2][grid_size.y - 2][player2.type] = player2
-	add_child(player2)
-
-	# indicator instance
-	var indicator = Indicator.instance()
-	indicator.position = player1.position
-	indicator.player = player1
-	grid[1][1][indicator.type] = indicator
-	add_child(indicator)
+func add_object(child_node: Node2D, grid_position: Vector2) -> void:
+	child_node.position = map_to_world(grid_position) + self.half_tile_size
+	self._grid[grid_position.x][grid_position.y][child_node.type] = child_node
+	add_child(child_node)
 
 func can_move(child_node, direction) -> bool:
+	"""
+	This function check if a node can move from its postion on the grid toward
+	to the input `direction`.
+	The check relies on the boundaries stored on the player instance which
+	should be bound to the `child_node`.
+	"""
+	# TODO: could be better to move this method on the player itself
+	#       because its the one the owns the boundaries of the area
+	#       where bound nodes can move.
 	var grid_position: Vector2 = world_to_map(child_node.position) + direction
 	var player: Player = child_node.player
 
@@ -59,12 +46,11 @@ func update_child_position(child_node) -> Vector2:
 
 	# get the entity on the grid of the same type
 	# of the object that wants to update its position
-	var entity = grid[grid_pos.x][grid_pos.y][child_node.type]
+	var entity = self._grid[grid_pos.x][grid_pos.y][child_node.type]
 
 	# move the item on the grid
-	grid[grid_pos.x][grid_pos.y].erase(child_node.type)
-	grid[new_pos.x][new_pos.y][child_node.type] = entity
-	# move the item on the physical world
-	# TODO: this part could be handled by the item directly
-	#       returning the new pos
+	self._grid[grid_pos.x][grid_pos.y].erase(child_node.type)
+	self._grid[new_pos.x][new_pos.y][child_node.type] = entity
+	# returns the new position the item should have
+	# on the physical world
 	return map_to_world(new_pos) + half_tile_size

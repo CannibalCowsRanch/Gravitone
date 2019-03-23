@@ -1,5 +1,5 @@
 extends Node2D
-class_name Grid
+class_name Indicator
 
 # The movement speed of the indicator
 const SPEED = 20.0
@@ -27,7 +27,7 @@ var _target_position: Vector2 = Vector2.ZERO
 var type = "indicator"
 var player = null
 
-onready var grid: Grid = get_parent()
+onready var grid: Grid = get_node("/root/Game/Grid")
 
 enum States {
 	IDLE,

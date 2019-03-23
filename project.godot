@@ -9,18 +9,30 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
+"base": "Node",
+"class": "Game",
+"language": "GDScript",
+"path": "res://scenes/Game.gd"
+}, {
+"base": "TileMap",
 "class": "Grid",
+"language": "GDScript",
+"path": "res://scenes/Grid.gd"
+}, {
+"base": "Node2D",
+"class": "Indicator",
 "language": "GDScript",
 "path": "res://entities/Indicator.gd"
 }, {
-"base": "TileMap",
+"base": "Node2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://scenes/Grid.gd"
+"path": "res://entities/Player.gd"
 } ]
 _global_script_class_icons={
+"Game": "",
 "Grid": "",
+"Indicator": "",
 "Player": ""
 }
 
