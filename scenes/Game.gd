@@ -7,7 +7,7 @@ onready var Indicator = preload("res://entities/Indicator.tscn")
 func _ready() -> void:
 	var grid: Grid = $Grid
 
-		# init first player
+	# init first player
 	var player1 = Player.instance()
 	grid.add_object(player1, Vector2(1, 1))
 	player1.top_left = Vector2.ZERO

@@ -8,6 +8,9 @@ var half_tile_size : Vector2 = self.tile_size / 2
 # the viewport size divided by the cell size
 onready var grid_size = Vector2(960 / tile_size.x,
 								512 / tile_size.y)
+
+# This is the data structure where we store a reference
+# to the objects contained by each cell of the grid
 var _grid = []
 
 func _ready():
@@ -51,6 +54,7 @@ func update_child_position(child_node) -> Vector2:
 	# move the item on the grid
 	self._grid[grid_pos.x][grid_pos.y].erase(child_node.type)
 	self._grid[new_pos.x][new_pos.y][child_node.type] = entity
+
 	# returns the new position the item should have
 	# on the physical world
 	return map_to_world(new_pos) + half_tile_size
