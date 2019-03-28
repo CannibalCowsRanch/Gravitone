@@ -2,7 +2,7 @@ extends Node2D
 class_name Indicator
 
 # The movement speed of the indicator
-const SPEED = 20.0
+const SPEED = 30.0
 
 const PAUSE_DURATION_SLOW = 0.15
 const PAUSE_DURATION_FAST = 0.03

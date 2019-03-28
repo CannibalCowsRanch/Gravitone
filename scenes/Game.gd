@@ -2,24 +2,28 @@ extends Node
 class_name Game
 
 onready var Player = preload("res://entities/Player.tscn")
+onready var Planet = preload("res://entities/Planet.tscn")
 onready var Indicator = preload("res://entities/Indicator.tscn")
 
-func _ready() -> void:
-	var grid: Grid = $Grid
 
+func _ready() -> void:
 	# init first player
 	var player1 = Player.instance()
-	grid.add_object(player1, Vector2(1, 1))
-	player1.top_left = Vector2.ZERO
-	player1.bottom_right = Vector2(floor(grid.grid_size.x / 2), grid.grid_size.y)
+	_setup_player(player1, Vector2(1, 1))
 
 	# init second player
 	var player2 = Player.instance()
-	grid.add_object(player2, Vector2(grid.grid_size.x - 2, grid.grid_size.y - 2))
-	player2.top_left = Vector2(ceil(grid.grid_size.x / 2), 0)
-	player2.bottom_right = grid.grid_size
+	_setup_player(player2, Vector2($Grid.grid_size.x - 2, $Grid.grid_size.y - 2))
 
-	# indicator instance
+
+func _setup_player(player: Player, grid_position: Vector2) -> void:
+	add_child(player)
+
+	# Add planet for the player
+	var planet = Planet.instance()
+	$Grid.add_object(planet, grid_position)
+
+	# Add indicator for the player
 	var indicator = Indicator.instance()
-	indicator.player = player1
-	grid.add_object(indicator, Vector2(1, 1))
+	indicator.player = player
+	$Grid.add_object(indicator, grid_position)
