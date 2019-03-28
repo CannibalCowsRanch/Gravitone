@@ -1,3 +1,5 @@
 extends Node2D
+class_name Entity
 
-export var health = 100;
+var player: Player = null
+var health = 100;

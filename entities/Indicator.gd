@@ -1,6 +1,8 @@
 extends Node2D
 class_name Indicator
 
+signal spawn(player, position)
+
 # The movement speed of the indicator
 const SPEED = 30.0
 
@@ -25,7 +27,7 @@ var _start_position: Vector2 = Vector2.ZERO
 var _target_position: Vector2 = Vector2.ZERO
 
 var type = "indicator"
-var player = null
+var player: Player = null
 
 onready var grid: Grid = get_node("/root/Game/Grid")
 
@@ -45,6 +47,9 @@ static func get_input_direction() -> Vector2:
 	)
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("spawn"):
+		emit_signal("spawn", player, grid.world_to_map(position))
+
 	if _state == States.IDLE:
 		process_idle()
 	elif _state == States.MOVING:

@@ -31,5 +31,6 @@ format = 1
 script = ExtResource( 3 )
 
 [node name="VisualGrid" type="Node2D" parent="Grid"]
+visible = false
 script = SubResource( 1 )
 
