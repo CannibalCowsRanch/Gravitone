@@ -1,6 +1,6 @@
 extends Node
 
-# Cooldown is the number of seconds 
+# Cooldown is the number of seconds
 # needed to mine an amount of resource
 export var cooldown = 1;
 

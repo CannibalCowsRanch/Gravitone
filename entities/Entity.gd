@@ -1,5 +1,5 @@
-extends Node2D
+extends RigidBody2D
 class_name Entity
 
 var player: Player = null
-var health = 100;
+var health: int = 100;

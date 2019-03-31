@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/Asteroid.gd"
 }, {
-"base": "Node2D",
+"base": "RigidBody2D",
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://entities/Bullet.gd"
@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/Cannon.gd"
 }, {
-"base": "Node2D",
+"base": "RigidBody2D",
 "class": "Entity",
 "language": "GDScript",
 "path": "res://entities/Entity.gd"
