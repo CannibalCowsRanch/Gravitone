@@ -7,7 +7,8 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 9.01914
 
-[node name="Cannon" index="0" instance=ExtResource( 1 )]
+[node name="Cannon" instance=ExtResource( 1 )]
+mode = 1
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="0"]

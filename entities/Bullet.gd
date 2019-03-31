@@ -6,3 +6,7 @@ var direction = Vector2.ZERO
 
 func _ready() -> void:
 	self.apply_impulse(Vector2.ZERO, direction)
+
+func _on_Timer_timeout() -> void:
+	# If timer reaches timeout we will destory the object.
+	self.queue_free()
