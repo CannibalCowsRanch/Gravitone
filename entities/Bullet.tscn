@@ -1,12 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://entities/Entity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/Bullet.gd" type="Script" id=2]
 [ext_resource path="res://images/bullet.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 7.3653
 
-[node name="Bullet" instance=ExtResource( 1 )]
+[sub_resource type="CircleShape2D" id=2]
+radius = 17.1833
+
+[node name="Bullet" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="Body" index="0"]
@@ -15,5 +19,13 @@ shape = SubResource( 1 )
 [node name="Sprite" parent="Body" index="1"]
 texture = ExtResource( 3 )
 
+[node name="Gravitor" parent="Body" index="2"]
+position = Vector2( 0.0852585, 0 )
+
+[node name="Collision" parent="Body/Gravitor" index="0"]
+shape = SubResource( 2 )
+
 
 [editable path="Body"]
+
+[editable path="Body/Gravitor"]
