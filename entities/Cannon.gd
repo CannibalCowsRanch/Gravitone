@@ -11,5 +11,6 @@ func _ready() -> void:
 
 func _on_Timer_timeout() -> void:
 	var bullet = Bullet.instance()
+	bullet.position = $Direction/SpawnPoint.position
 	bullet.direction = Vector2(1, 0) * thrust
 	add_child(bullet)
