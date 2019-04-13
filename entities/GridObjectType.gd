@@ -1,0 +1,10 @@
+extends Node
+
+enum {
+	INVALID,
+	INDICATOR,
+	CANNON,
+	ASTEROID,
+	PLANET,
+	GRAVITONE,
+}
