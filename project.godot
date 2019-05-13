@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/Asteroid.gd"
 }, {
+"base": "TileMap",
+"class": "BaseGrid",
+"language": "GDScript",
+"path": "res://scenes/BaseGrid.gd"
+}, {
 "base": "RigidBody2D",
 "class": "Bullet",
 "language": "GDScript",
@@ -23,6 +28,11 @@ _global_script_classes=[ {
 "class": "Cannon",
 "language": "GDScript",
 "path": "res://entities/Cannon.gd"
+}, {
+"base": "BaseGrid",
+"class": "EntitiesGrid",
+"language": "GDScript",
+"path": "res://scenes/EntitiesGrid.gd"
 }, {
 "base": "RigidBody2D",
 "class": "Entity",
@@ -34,15 +44,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/Game.gd"
 }, {
-"base": "TileMap",
-"class": "Grid",
-"language": "GDScript",
-"path": "res://scenes/Grid.gd"
-}, {
 "base": "Node2D",
 "class": "Indicator",
 "language": "GDScript",
 "path": "res://entities/Indicator.gd"
+}, {
+"base": "BaseGrid",
+"class": "IndicatorsGrid",
+"language": "GDScript",
+"path": "res://scenes/IndicatorsGrid.gd"
 }, {
 "base": "RigidBody2D",
 "class": "Planet",
@@ -56,12 +66,14 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Asteroid": "",
+"BaseGrid": "",
 "Bullet": "",
 "Cannon": "",
+"EntitiesGrid": "",
 "Entity": "",
 "Game": "",
-"Grid": "",
 "Indicator": "",
+"IndicatorsGrid": "",
 "Planet": "",
 "Player": ""
 }
@@ -74,7 +86,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GridObjectType="*res://entities/GridObjectType.gd"
+Types="*res://entities/Types.gd"
 
 [display]
 
@@ -87,31 +99,31 @@ window/stretch/aspect="keep"
 
 [input]
 
-move_right={
+move_right_1={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
  ]
 }
-move_left={
+move_left_1={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
  ]
 }
-move_up={
+move_up_1={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
  ]
 }
-move_down={
+move_down_1={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
  ]
 }
-action={
+interact_1={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
  ]

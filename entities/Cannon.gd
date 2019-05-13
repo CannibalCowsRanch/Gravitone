@@ -12,14 +12,14 @@ export var thrust = 400;
 
 enum States {
 	IDLE,
-	ACTION
+	INTERACT
 }
 
 var _state = States.IDLE
 
 func _ready() -> void:
 	# Set the type of the object
-	self.type = GridObjectType.CANNON
+	self.type = Types.EntityType.CANNON
 	$Timer.wait_time = self.COOLDOWN
 
 func _set_cooldown(new_value: float) -> void:
@@ -37,27 +37,27 @@ func _on_Timer_timeout() -> void:
 	add_child(bullet)
 
 func _process(delta: float) -> void:
-	if self._state == States.ACTION:
-		self._process_action(delta)
+	if self._state == States.INTERACT:
+		self._process_interact(delta)
 
-func _process_action(delta) -> void:
+func _process_interact(delta) -> void:
 	# Moves direction up and down
-	if Input.is_action_pressed("move_down"):
+	if Input.is_action_pressed(self.player.action.move_down):
 		$Direction.rotate(2.0 * delta)
-	if Input.is_action_pressed("move_up"):
+	if Input.is_action_pressed(self.player.action.move_up):
 		$Direction.rotate(-2.0 * delta)
 
 	# Increase or Decrease cooldown
-	if Input.is_action_just_pressed("move_left"):
+	if Input.is_action_just_pressed(self.player.action.move_left):
 		self._cooldown_delta = max(self._cooldown_delta - 0.1, self.MIN_COOLDOWN_DELTA)
-	if Input.is_action_just_pressed("move_right"):
+	if Input.is_action_just_pressed(self.player.action.move_right):
 		self._cooldown_delta = min(self._cooldown_delta + 0.1, self.MAX_COOLDOWN_DELTA)
 
-func action() -> void:
+func interact() -> void:
 	# Here we change some properties of the
 	# Cooldown and Direction nodes.
 	# TODO: This SHOULD be done with animations
-	if self._state == States.ACTION:
+	if self._state == States.INTERACT:
 		$CooldownLabel.visible = false
 		$Direction.modulate = Color(1, 1, 1, 0.5)
 		self._state = States.IDLE
@@ -65,4 +65,4 @@ func action() -> void:
 	elif self._state == States.IDLE:
 		$CooldownLabel.visible = true
 		$Direction.modulate = Color(1, 1, 1, 1)
-		self._state = States.ACTION
+		self._state = States.INTERACT

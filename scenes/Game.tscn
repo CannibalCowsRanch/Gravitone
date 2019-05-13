@@ -2,19 +2,8 @@
 
 [ext_resource path="res://scenes/Game.gd" type="Script" id=1]
 [ext_resource path="res://images/background.png" type="Texture" id=2]
-[ext_resource path="res://scenes/Grid.gd" type="Script" id=3]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends Node2D
-
-onready var grid = get_parent()
-
-
-func _draw():
-	for x in range(grid.grid_size.x):
-		for y in range(grid.grid_size.y):
-			var pos = grid.map_to_world(Vector2(x, y)) + grid.half_tile_size
-			draw_circle(pos, 10, Color(\"#77ffffff\"))"
+[ext_resource path="res://scenes/EntitiesGrid.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/IndicatorsGrid.tscn" type="PackedScene" id=4]
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
@@ -24,13 +13,6 @@ position = Vector2( 0, -1 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Grid" type="TileMap" parent="."]
-position = Vector2( 0, 28 )
-cell_size = Vector2( 32, 32 )
-format = 1
-script = ExtResource( 3 )
+[node name="EntitiesGrid" parent="." instance=ExtResource( 3 )]
 
-[node name="VisualGrid" type="Node2D" parent="Grid"]
-visible = false
-script = SubResource( 1 )
-
+[node name="IndicatorsGrid" parent="." instance=ExtResource( 4 )]

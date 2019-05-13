@@ -4,4 +4,4 @@ class_name Asteroid
 export var total_resource = 100;
 
 func _ready() -> void:
-	self.type = GridObjectType.ASTEROID
+	self.type = Types.EntityType.ASTEROID
