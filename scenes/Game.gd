@@ -13,8 +13,8 @@ func _ready() -> void:
 	_setup_player(player1, Vector2(1, 1))
 
 	# init second player
-	#var player2: Player = Player.instance()
-	#_setup_player(player2, Vector2($Grid.grid_size.x - 2, $Grid.grid_size.y - 2))
+	var player2: Player = Player.new(Types.PlayerNumber.PLAYER_2)
+	_setup_player(player2, Vector2($EntitiesGrid.grid_size.x - 2, $EntitiesGrid.grid_size.y - 2))
 
 	$EntitiesGrid.add_object(Asteroid.instance(), Vector2(4, 2))
 	$EntitiesGrid.add_object(Asteroid.instance(), Vector2(6, 2))
