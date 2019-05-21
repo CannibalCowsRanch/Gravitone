@@ -40,7 +40,7 @@ func _setup_player(player: Player, grid_position: Vector2) -> void:
 
 	# Add indicator for the player
 	var indicator: Indicator = Indicator.instance()
-	if indicator.connect("interact", self, "_on_interact") != OK:
+	if indicator.connect("interact", self, "_on_interact", [indicator]) != OK:
 		print("Connection to `interact` signal failed.")
 	if indicator.connect("move", self, "_on_move", [indicator]) != OK:
 		print("Connection to `move` signal failed.")
@@ -48,10 +48,11 @@ func _setup_player(player: Player, grid_position: Vector2) -> void:
 	indicator.player = player
 	$IndicatorsGrid.add_object(indicator, grid_position)
 
-func _on_interact(player: Player, position: Vector2) -> void:
+func _on_interact(player: Player, position: Vector2, indicator: Indicator) -> void:
 	var grid_position = $IndicatorsGrid.world_to_map(position)
 	var entity = $EntitiesGrid.get_entity(grid_position)
 	if entity == null:
+		indicator.interact()
 		var cannon: Cannon = Cannon.instance()
 		cannon.player = player
 		cannon.interact()
@@ -59,6 +60,7 @@ func _on_interact(player: Player, position: Vector2) -> void:
 	else:
 		# propagate the action only if the player owns the object
 		if entity.player == player:
+			indicator.interact()
 			entity.interact()
 
 func _on_move(direction: Vector2, indicator: Indicator) -> void:
