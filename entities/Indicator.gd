@@ -59,12 +59,10 @@ func _process(delta: float) -> void:
 
 func _process_interact() -> void:
 	if Input.is_action_just_pressed(self.player.action.interact):
-		self._state = States.IDLE
 		emit_signal("interact", player, position)
 
 func _process_idle() -> void:
 	if Input.is_action_just_pressed(self.player.action.interact):
-		self._state = States.INTERACT
 		emit_signal("interact", player, position)
 		return
 
@@ -84,16 +82,6 @@ func _process_idle() -> void:
 	if self.direction != Vector2.ZERO:
 		emit_signal("move", self.direction)
 
-func begin_move(target_position: Vector2) -> void:
-	"""
-	To begin movement animation one should call this method.
-	Usually this is called from the main scene which has access
-	ot the indicators' grid to compute the target position.
-	"""
-	self._target_position = target_position
-	self._start_position = self.position
-	self._state = States.MOVING
-
 func _process_moving(delta: float) -> void:
 	self._elapsed += delta
 	var weight = self._elapsed * self.SPEED
@@ -106,4 +94,23 @@ func _process_pause(delta: float) -> void:
 	self._elapsed += delta
 	if self._elapsed >= self._pause_duration:
 		self._elapsed = 0
+		self._state = States.IDLE
+
+func begin_move(target_position: Vector2) -> void:
+	"""
+	To begin movement animation one should call this method.
+	Usually this is called from the main scene which has access
+	ot the indicators' grid to compute the target position.
+	"""
+	self._target_position = target_position
+	self._start_position = self.position
+	self._state = States.MOVING
+
+func interact() -> void:
+	"""
+	Toggle from idle to interact state and viceversa
+	"""
+	if self._state == States.IDLE:
+		self._state = States.INTERACT
+	elif self._state == States.INTERACT:
 		self._state = States.IDLE
