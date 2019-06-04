@@ -10,3 +10,9 @@ func _ready() -> void:
 func _on_Timer_timeout() -> void:
 	# If timer reaches timeout we will destory the object.
 	self.queue_free()
+
+func _on_body_entered(body: Node) -> void:
+	body.health -= 10
+	if body.health <= 0:
+		body.queue_free()
+	self.queue_free()

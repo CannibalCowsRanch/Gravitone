@@ -30,7 +30,7 @@ autostart = true
 [node name="Direction" type="Node2D" parent="." index="4"]
 
 [node name="SpawnPoint" type="Position2D" parent="Direction" index="0"]
-position = Vector2( 16, 0 )
+position = Vector2( 25, 0 )
 
 [node name="Sprite" type="Sprite" parent="Direction" index="1"]
 position = Vector2( 17, 0 )
@@ -45,7 +45,6 @@ margin_bottom = 41.0
 custom_fonts/font = SubResource( 2 )
 text = "0"
 align = 1
-
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 [editable path="Gravitor"]
